@@ -9,24 +9,12 @@ class RecursiveMenu {
     private $catalogsByPID = array();
     private $productsByPID = array();
 
-    public function __construct(PDO $db) {
-        $result = $db->query("SELECT * FROM catalogs");
-        while ($row = $result->fetch(PDO::FETCH_OBJ)) {
-            $this->catalogs[$row->id] = $row;
-            if (!isset($this->catalogsByPID[$row->pid])) {
-                $this->catalogsByPID[$row->pid] = array();
-            }
-            array_push($this->catalogsByPID[$row->pid], $row->id);
-        }
+    public function __construct($catalogs, $catalogsByPID, $products, $productsByPID) {
+        $this->catalogs      = $catalogs;
+        $this->catalogsByPID = $catalogsByPID;
         
-        $result = $db->query("SELECT * FROM products");
-        while ($row = $result->fetch(PDO::FETCH_OBJ)) {
-            $this->products[$row->id] = $row;
-            if (!isset($this->productsByPID[$row->pid])) {
-                $this->productsByPID[$row->pid] = array();
-            }
-            array_push($this->productsByPID[$row->pid], $row->id);
-        }
+        $this->products      = $products;
+        $this->productsByPID = $productsByPID;
     }
     
     public function assembleMenu ($rootNodeId = 0) {
