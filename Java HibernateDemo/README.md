@@ -8,3 +8,11 @@ all the SQL commands executed by it and the resulting output which shows that th
 child Entity have been successfully persisted in the database.
 
 As this is a Maven project, you should be able to easily import it into your IDE.
+
+The data model consists of only two associated entities just to demonstrate how to set up a simple
+one-to-many relationship with cascading:
+
+
+     _____          _____
+    | Bar | <>---- | Foo |
+     ¯¯¯¯¯          ¯¯¯¯¯
