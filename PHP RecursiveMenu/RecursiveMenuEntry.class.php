@@ -41,23 +41,32 @@ class RecursiveMenuEntry {
     	$output = '<ul>';
     	if (count($this->children) > 0) {
             foreach ($this->children as $child) {
-                $output .= $child->renderRecursively();
+                $output .= $child->renderRecursively(0);
             }
         }
         $output .= '</ul>';
         return $output;
     }
     
-    private function renderRecursively () {
-    	$output = '<li>' . $this->name . ' (' . $this->productCount . ')';
-    	if (count($this->children) > 0) {
-    	    $output .= '<ul>';
-            foreach ($this->children as $child) {
-                $output .= $child->renderRecursively();
+    /**
+     * @todo add a switch for the applied if, that catalogs with 0 entries aren't displayed
+     */
+    private function renderRecursively ($level) {
+        $output = "";
+        if($this->productCount > 0)
+        {
+            $output = '<li class="level_'.$level.'">' . $this->name . ' (' . $this->productCount . ')';
+    	    if (count($this->children) > 0) {
+    	        $nextLevel = $level + 1;
+    	        $output .= '<ul class="level_'.$nextLevel.'">';
+                foreach ($this->children as $child) {
+                    $output .= $child->renderRecursively($nextLevel);
+                }
+                $output .= '</ul>';
             }
-            $output .= '</ul>';
+        
+            $output .= '</li>';
         }
-        $output .= '</li>';
         return $output;   
     }
 
