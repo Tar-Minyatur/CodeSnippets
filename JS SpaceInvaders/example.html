@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>JS SpaceInvaders</title>
+    </head>
+    <body>    
+        <h1>JavaScript SpaceInvaders</h1>
+        <h2>Canvas Demo by Till Helge Helwig</h2>
+        <div id="invadersGame"></div>
+        <script type="text/javascript" src="invaders.js"></script>
+        <script type="text/javascript">
+            (function (window) {
+                // Override default colors
+                invaders.colors.enemyColor = 'rgb(90,255,90)';
+                invaders.colors.backgroundColor = 'rgb(33, 33, 33)';
+
+                // Size Definitions
+                var width = 30,
+                    height = 40,
+                    drawingScaleX = 8,
+                    drawingScaleY = 8;
+
+                // Initialize Game
+                invaders.createGame(document.getElementById('invadersGame'),
+                                    width, height,
+                                    drawingScaleX, drawingScaleY);
+            })(window);
+        </script>
+    </body>
+</html>
