@@ -4,16 +4,16 @@ import org.apache.commons.compress.archivers.ArchiveEntry;
 import org.apache.commons.compress.archivers.ArchiveOutputStream;
 import org.apache.commons.compress.archivers.tar.TarArchiveOutputStream;
 import org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream;
+import org.apache.commons.compress.compressors.gzip.GzipCompressorOutputStream;
 import org.apache.commons.compress.utils.IOUtils;
 
 import java.io.*;
-import java.util.zip.GZIPOutputStream;
 
 public class RecursiveDirectoryCompressor {
 
     public static TarArchiveOutputStream createTarGzArchive(File archiveFile) throws IOException {
         return new TarArchiveOutputStream(
-                new GZIPOutputStream(
+                new GzipCompressorOutputStream(
                         new BufferedOutputStream(
                                 new FileOutputStream(archiveFile)
                         )
